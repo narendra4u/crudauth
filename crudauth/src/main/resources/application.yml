@@ -1,0 +1,15 @@
+server:
+  port: 8080
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/crudauth
+
+jwt:
+  secret: mysecretkey123456
+  expiration: 86400000 # 1 day
+
+logging:
+  level:
+    org.springframework.security: INFO
