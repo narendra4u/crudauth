@@ -45,16 +45,21 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public AuthResponse login(@RequestBody AuthRequest request) {
+    public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest request) {
 
         User user = userRepository.findByUsername(request.getUsername())
-                .orElseThrow(() -> new RuntimeException("Invalid credentials"));
+                .orElse(null);
 
-        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-            throw new RuntimeException("Invalid credentials");
+        if (user == null ||
+                !passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+
+            return ResponseEntity
+                    .status(HttpStatus.UNAUTHORIZED)
+                    .build();
         }
 
         String token = jwtUtil.generateToken(user.getUsername());
-        return new AuthResponse(token);
+        return ResponseEntity.ok(new AuthResponse(token));
     }
+
 }

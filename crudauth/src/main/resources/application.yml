@@ -7,8 +7,8 @@ spring:
       uri: mongodb://localhost:27017/crudauth
 
 jwt:
-  secret: mysecretkey123456
-  expiration: 86400000 # 1 day
+  secret: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzAwMDAwMDAwfQ.CLuGoSX7l6z8cC-Y_SOeHbjgn0CrYNS8q-wBWPcA-R0
+  expiration: 86400000
 
 logging:
   level:
